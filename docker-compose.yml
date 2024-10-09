@@ -1,0 +1,21 @@
+# Network
+networks:
+  web_network:
+    name: reactwebapi_network
+    driver: bridge
+
+# Services
+services:
+  reactapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: reactwebapi
+    ports:
+      - 5173:5173
+    volumes:
+      - ./:/usr/app
+      - /usr/app/node_modules
+    restart: always
+    networks:
+      - web_network
